@@ -1,12 +1,13 @@
-import {SELECT_TASK, ADD_TASK, DELETE_TASK} from '../actions/actionType';
+import {SELECT_TASK, ADD_TASK, DELETE_TASK, UPDATE_TASK} from '../actions/actionType';
 // import ListTodo from './list_todo';
 
 const todoList = {
     todoArr: [
-        {name: "cam bà điên"},
-        {name: "quyit khung"}
+        {name: "Task 1"},
+        {name: "Task 2"}
     ],
-    error: []
+    error: [],
+
 }
 export default function TodoReduce (state = todoList , action) {
         console.log("đã vào Reduce");
@@ -28,6 +29,12 @@ export default function TodoReduce (state = todoList , action) {
                         todoArr: state.todoArr.filter((e, i) => i !== action.payload)
 
                     }
+
+                    case UPDATE_TASK:
+                        return {
+                            ...state,
+                            todoArr: [...state.todoArr, action.payload]
+                        }
             default:
                 return state;
         }

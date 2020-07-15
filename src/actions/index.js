@@ -1,4 +1,4 @@
-import {SELECT_TASK, ADD_TASK, DELETE_TASK} from './actionType';
+import {SELECT_TASK, ADD_TASK, DELETE_TASK, UPDATE_TASK} from './actionType';
 
 export const selectTaskList = (task) => {
     return {
@@ -21,5 +21,16 @@ export const deleteTask = (id) => {
     return {
         type: DELETE_TASK,
         payload: id
+    }
+}
+
+export const updateTask = (task, id) => {
+    console.log('update task', task, id);
+    return {
+        type: UPDATE_TASK,
+        payload: {
+            id,
+            task
+        }
     }
 }
