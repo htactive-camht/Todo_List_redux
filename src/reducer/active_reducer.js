@@ -1,4 +1,4 @@
-import {SELECT_TASK, ADD_TASK} from '../actions/actionType';
+import {SELECT_TASK, ADD_TASK, DELETE_TASK} from '../actions/actionType';
 // import ListTodo from './list_todo';
 
 const todoList = {
@@ -19,6 +19,14 @@ export default function TodoReduce (state = todoList , action) {
                     return {
                         ...state,
                         todoArr: [ ...state.todoArr, action.payload] 
+                    }
+
+                    case DELETE_TASK: 
+                    console.log(" delete", action.payload);
+                    return {
+                        ...state,
+                        todoArr: state.todoArr.filter((e, i) => i !== action.payload)
+
                     }
             default:
                 return state;

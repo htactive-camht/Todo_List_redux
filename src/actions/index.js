@@ -17,6 +17,7 @@ export const addTaskList = (task) => {
 }
 
 export const deleteTask = (id) => {
+      console.log('deleteTask íd',id);
     return {
         type: DELETE_TASK,
         payload: id

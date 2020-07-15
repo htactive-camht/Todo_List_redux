@@ -10,7 +10,6 @@ import {createStore} from 'redux';
 
 
 const stores = createStore(allReducers)
-console.log(stores.getState());
 
 ReactDOM.render(
   <React.StrictMode>
