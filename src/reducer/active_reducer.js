@@ -1,42 +1,41 @@
-import {SELECT_TASK, ADD_TASK, DELETE_TASK, UPDATE_TASK} from '../actions/actionType';
+import {
+  SELECT_TASK,
+  ADD_TASK,
+  DELETE_TASK,
+  UPDATE_TASK,
+} from "../actions/actionType";
 // import ListTodo from './list_todo';
 
 const todoList = {
-    todoArr: [
-        {name: "Task 1"},
-        {name: "Task 2"}
-    ],
-    error: [],
+  todoArr: [{ name: "Task 1" }, { name: "Task 2" }],
+  error: [],
+};
+export default function TodoReduce(state = todoList, action) {
+  console.log("đã vào Reduce");
+  switch (action.type) {
+    case SELECT_TASK:
+      return { ...state };
 
-}
-export default function TodoReduce (state = todoList , action) {
-        console.log("đã vào Reduce");
-        switch (action.type){
-            case SELECT_TASK:
-                return {...state};
+    case ADD_TASK:
+      console.log("ket qua trong reduce", action.payload);
+      return {
+        ...state,
+        todoArr: [...state.todoArr, action.payload],
+      };
 
-                case ADD_TASK:
-                    console.log("ket qua trong reduce", action.payload);
-                    return {
-                        ...state,
-                        todoArr: [ ...state.todoArr, action.payload] 
-                    }
+    case DELETE_TASK:
+      console.log(" delete", action.payload);
+      return {
+        ...state,
+        todoArr: state.todoArr.filter((e, i) => i !== action.payload),
+      };
 
-                    case DELETE_TASK: 
-                    console.log(" delete", action.payload);
-                    return {
-                        ...state,
-                        todoArr: state.todoArr.filter((e, i) => i !== action.payload)
-
-                    }
-
-                    case UPDATE_TASK:
-                        return {
-                            ...state,
-                            todoArr: [...state.todoArr, action.payload]
-                        }
-            default:
-                return state;
-        }
-       
+    case UPDATE_TASK:
+      return {
+        ...state,
+        todoArr: [...state.todoArr, action.payload],
+      };
+    default:
+      return state;
+  }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { selectTaskList, addTaskList , deleteTask} from "../actions/index";
+import { selectTaskList, addTaskList , deleteTask, updateTask} from "../actions/index";
 import "./tasklist.css";
 import { Row, Col, Input, Button } from "antd";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
@@ -27,6 +27,11 @@ class TaskList extends Component {
   deleteTaskByID = (id) =>{
     const {dispatch} = this.props;
     dispatch(deleteTask(id))
+  };
+
+  updateTask = (task, id) => {
+    const {dispatch} = this.props;
+    dispatch(updateTask(task, id))
   }
 
   createTaskList() {
@@ -35,7 +40,7 @@ class TaskList extends Component {
         <div key={index} className="divTodo">
           <div className="divTodoHeader">
             <Input type="checkbox"></Input>
-            <Button value={eachTask.index}>
+            <Button onClick = { () =>this.updateTask(eachTask, index)}>
               {" "}
               <EditOutlined />
             </Button>
