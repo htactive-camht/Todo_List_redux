@@ -29,7 +29,7 @@ class TaskList extends Component {
     dispatch(deleteTask(id))
   };
 
-  updateTask = (task, id) => {
+  updateTaskID = (task, id) => {
     const {dispatch} = this.props;
     dispatch(updateTask(task, id))
   }
@@ -40,7 +40,7 @@ class TaskList extends Component {
         <div key={index} className="divTodo">
           <div className="divTodoHeader">
             <Input type="checkbox"></Input>
-            <Button onClick = { () =>this.updateTask(eachTask, index)}>
+            <Button onClick = { () =>this.updateTaskID(eachTask, index)}>
               {" "}
               <EditOutlined />
             </Button>

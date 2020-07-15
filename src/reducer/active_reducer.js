@@ -4,6 +4,7 @@ import {
   DELETE_TASK,
   UPDATE_TASK,
 } from "../actions/actionType";
+import store from '../app/store'
 // import ListTodo from './list_todo';
 
 const todoList = {
@@ -30,11 +31,13 @@ export default function TodoReduce(state = todoList, action) {
         todoArr: state.todoArr.filter((e, i) => i !== action.payload),
       };
 
-    case UPDATE_TASK:
-      return {
-        ...state,
-        todoArr: [...state.todoArr, action.payload],
-      };
+      case UPDATE_TASK:
+            return state.map((item, id) => {
+                if (payload.id === id) {
+                    return { ...state, todoArr: payload.text }
+                }
+                return item
+            })
     default:
       return state;
   }
