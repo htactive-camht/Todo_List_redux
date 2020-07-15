@@ -1,19 +1,24 @@
 import {SELECT_TASK, ADD_TASK} from '../actions/actionType';
-import ListTodo from './list_todo';
+// import ListTodo from './list_todo';
 
-export default (state = ListTodo , action) => {
+const todoList = {
+    todoArr: [
+        {name: "cam bà điên"},
+        {name: "quyit khung"}
+    ],
+    error: []
+}
+export default function TodoReduce (state = todoList , action) {
+        console.log("đã vào Reduce");
         switch (action.type){
             case SELECT_TASK:
                 return {...state};
 
                 case ADD_TASK:
+                    console.log("ket qua trong reduce", action.payload);
                     return {
                         ...state,
-                        ListTodo: [ ...state.ListTodo,{
-                            id: Math.random(),
-                            value: action.payload,
-                        }
-                      ] 
+                        todoArr: [ ...state.todoArr, action.payload] 
                     }
             default:
                 return state;

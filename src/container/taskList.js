@@ -1,63 +1,52 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { selectTaskList } from "../actions/index";
+import { selectTaskList, addTaskList } from "../actions/index";
 import "./tasklist.css";
 import { Row, Col, Input, Button } from "antd";
 import { EditOutlined, CloseOutlined } from "@ant-design/icons";
 
+
 class TaskList extends Component {
-  
-  constructor(props) {
-    super(props)
-    this.state = {
-      addTask: ''
+  constructor(props){
+    super(props);
+    this.state={
+      NewTodo: ''
     }
   }
 
-  handleTitleChange(event) {
-    console.log(event);
-    this.setState({
-      title: event.target.value
-    })
-  }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    if (this.state.title !== '')
-    {
-      this.props.addTaskList(this.state.title)
-      //reset input box
-      this.setState({
-        title: ''
-      })
-    }
-  }
-  
   EnterInput = (e) => {
-    if (e.key === 'Enter') {
-      alert ('hello')
+    const {dispatch} = this.props;
+    if (e.key === "Enter") {
+      console.log("Event:",e.value);
+      dispatch(addTaskList({name:this.state.NewTodo}))
     }
-  }
+  };
+
   createTaskList() {
-    let listItems = this.props.taskList.map((eachTask, index) => {
+    let listItems = this.props.todo.map((eachTask, index) => {
       return (
         <div key={index} className="divTodo">
-          <div className='divTodoHeader'>
-          <Input type="checkbox"></Input>
-          <Button value ={eachTask.id}>
-                {" "}
-                <EditOutlined />
-              </Button>
-              <Button value ={eachTask.id}>
-                <CloseOutlined />
-              </Button>
-          
+          <div className="divTodoHeader">
+            <Input type="checkbox"></Input>
+            <Button value={eachTask.index}>
+              {" "}
+              <EditOutlined />
+            </Button>
+            <Button value={eachTask.index}>
+              <CloseOutlined />
+            </Button>
           </div>
-          <div className='divTodoHeader'>
-          <Row>
-            <Col span={24}>Content :{eachTask.content}</Col>
-          </Row>
+          <div className="divTodoHeader">
+            <Row>
+              <Col span={24}>Date time: </Col>
+            </Row>
+          </div>
+          <div className="divTodoHeader">
+            <Row>
+              <Col span={24}>Content :{eachTask.name}</Col>
+            </Row>
           </div>
         </div>
       );
@@ -69,11 +58,11 @@ class TaskList extends Component {
     return (
       <div className="">
         <div className="input-add">
-          <Input onKeyDown = {this.EnterInput} type ="text" name ="AddTask"  onChange={this.handleTitleChange.bind(this)} onClick={this.handleSubmit.bind(this)} ></Input>
+          <Input name='NewTodo'  onKeyDown={e=>this.EnterInput(e)} onChange={e=> this.setState({NewTodo:e.target.value})} type="text" ></Input>
         </div>
-        <div className ="ant-radio-group">
+        <div className="ant-radio-group">
           <label>All |</label>
-          <label>Incomple  |</label>
+          <label>Incomple |</label>
           <label>Completed</label>
         </div>
         <p>{this.createTaskList()}</p>
@@ -82,18 +71,20 @@ class TaskList extends Component {
   }
 }
 
-function mapListTask(state) {
+const mapStateToProps = (state) => {// mapStateToProps là hàm có sẳn không được tự tạo
+  console.log("log state:", state.todo.todoArr);// khi dùng ham mapStateToProps thì props sẽ nhận luôn cả dispatch nên dùng dispatch để chạy action gọi vào
   return {
     taskList: state.listTask,
-  };
+    todo: state.todo.todoArr,
+  }
 }
 
 
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ selectTaskList: selectTaskList }, dispatch);
-}
 
-const TaskContainer = connect(mapListTask, mapDispatchToProps)(TaskList);
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ selectTaskList: selectTaskList }, dispatch);
+// }
 
-export default TaskContainer;
+
+export default connect(mapStateToProps)(TaskList);

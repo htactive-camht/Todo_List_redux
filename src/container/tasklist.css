@@ -10,12 +10,13 @@
   width: 15px;
   height: 15px;
   border-radius: 10px;
-  margin-right: 2000px;
+  margin-right: 1800px;
   ;
 }
  button {
    width: 30px;
    height: 30px;
+   margin-top: 30px;
  }
 .container-tab {
   justify-content: flex-end;
@@ -32,20 +33,23 @@
 }
 .divTodo{
     width: 100%;
+    margin-top: 20px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     position: relative;
     padding: 20px 15px 20px 0px;
     overflow: hidden;
-    margin: 0px 0px 15px;
+    margin-left: 20px;
+    margin-right: 50px;
     background: rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
     border-color: rgb(233, 233, 233);
     border-image: initial;
     margin-bottom: 20px;
-    
+    border-left: 3px solid blue;
+    padding-left: 20px;
 }
 .divTodoHeader{
     width: 100%;
@@ -70,6 +74,7 @@
 
 .input-add input{
     font-size: 14px;
+   margin-top: 20px;
     font-weight: 400;
     color: rgb(151, 151, 151);
     line-height: inherit;
@@ -78,7 +83,7 @@
     background-color: rgb(255, 255, 255);
     box-shadow: none;
     padding: 0px 15px;
-    margin: 0px;
+    margin-left: 100px;
     border-width: 1px;
     border-style: solid;
     border-color: rgb(233, 233, 233);
