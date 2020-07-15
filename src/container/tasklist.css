@@ -1,0 +1,116 @@
+.container-task-list {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.ant-input {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  margin-right: 2000px;
+  ;
+}
+ button {
+   width: 30px;
+   height: 30px;
+ }
+.container-tab {
+  justify-content: flex-end;
+}
+
+.ant-tabs-nav-wrap {
+  justify-content: flex-end;
+}
+
+.container-show-task{
+    display: flex;
+    flex-direction: row;
+
+}
+.divTodo{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    padding: 20px 15px 20px 0px;
+    overflow: hidden;
+    margin: 0px 0px 15px;
+    background: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(233, 233, 233);
+    border-image: initial;
+    margin-bottom: 20px;
+    
+}
+.divTodoHeader{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.leftTodo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    
+}
+
+.rigthTodo{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+}
+
+.input-add input{
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(151, 151, 151);
+    line-height: inherit;
+    height: 50px;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: none;
+    padding: 0px 15px;
+    margin: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(233, 233, 233);
+    border-image: initial;
+    overflow: hidden;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+    outline: 0px !important;
+}
+
+.anticon > * {
+    line-height: 1;
+    margin-bottom: 30px;
+}
+
+.ant-radio-group {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  margin-left: 1100px;
+  padding: 0;
+  color: rgba(0,0,0,.65);
+  font-size: 24px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: "tnum","tnum";
+  display: inline-block;
+  line-height: unset;
+}
+
+.ant-radio-group label{
+  margin-left: 20px;
+}
