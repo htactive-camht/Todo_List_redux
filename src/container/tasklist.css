@@ -117,3 +117,8 @@
 .ant-radio-group label{
   margin-left: 20px;
 }
+
+.divTodo .text-area{
+  width: 1000px;
+  height: 50px;
+}
