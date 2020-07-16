@@ -27,14 +27,20 @@ class TaskList extends Component {
     const { dispatch } = this.props;
     if (e.key === "Enter") {
       console.log("Event:", e.value);
-      dispatch(addTaskList({ name: this.state.NewTodo }));
+      dispatch(addTaskList({ name: this.state.NewTodo, color: this.getRandomColor(), isUpdate: false }));
     }
   };
+
+  getRandomColor(){
+    let colorValues = ["red", "blue", "green", "yellow"];
+    return colorValues[Math.floor(Math.random() * colorValues.length)];
+  }
 
   deleteTaskByID = (id) => {
     const { dispatch } = this.props;
     dispatch(deleteTask(id));
   };
+  
 
   editUpdateTodoList = (index) => {
     this.setState((state) => ({
@@ -56,7 +62,7 @@ class TaskList extends Component {
       const { editId } = this.state;
       if (!this.state.edit) {
         return (
-          <div key={index} className="divTodo">
+          <div key={index} id="divTodo" className="divTodo">
             <div className="divTodoHeader">
               <Input type="checkbox"></Input>
               <Button onClick={() => this.editUpdateTodoList(index)}>
