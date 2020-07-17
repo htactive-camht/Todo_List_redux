@@ -91,7 +91,7 @@ class TaskList extends Component {
               </div>
               <div className="divTodoHeader">
                 <Row>
-                  <Col span={24}>Date time: </Col>
+          <Col span={24}>Date time: {eachTask.date}</Col>
                 </Row>
               </div>
               <div className="divTodoHeader">
@@ -121,7 +121,7 @@ class TaskList extends Component {
                 </div>
                 <div className="divTodoHeader">
                   <Row>
-                    <Col span={24}>Date time: </Col>
+                    <Col span={24}>Date time: {eachTask.date} </Col>
                   </Row>
                 </div>
                 <div className="divTodoHeader">
@@ -152,7 +152,7 @@ class TaskList extends Component {
                 </div>
                 <div className="divTodoHeader">
                   <Row>
-                    <Col span={24}>Date time: </Col>
+                    <Col span={24}>Date time: {eachTask.date} </Col>
                   </Row>
                 </div>
                 <div className="divTodoHeader">

@@ -7,10 +7,12 @@ import {
 // import store from '../app/store'
 // import ListTodo from './list_todo';
 
+const d = new Date();
+const n = d.toISOString();
 const todoList = {
   todoArr: [
-    { name: "Task 1", color: "blue", isUpdate: false },
-    { name: "Task 2", color: "red", isUpdate: false },
+    { name: "Task 1", date: n, color: "blue", isUpdate: false },
+    { name: "Task 2", date: n, color: "red", isUpdate: false },
   ],
 };
 export default function TodoReduce(state = todoList, action) {
