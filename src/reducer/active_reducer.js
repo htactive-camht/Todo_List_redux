@@ -9,14 +9,9 @@ import {
 
 const todoList = {
   todoArr: [
-    { name: "Task 1",
-    color: "blue",
-    isUpdate: false
-   },  { name: "Task 2",
-   color: "red",
-   isUpdate: false
-  }],
- 
+    { name: "Task 1", color: "blue", isUpdate: false },
+    { name: "Task 2", color: "red", isUpdate: false },
+  ],
 };
 export default function TodoReduce(state = todoList, action) {
   console.log("đã vào Reduce");
@@ -38,11 +33,16 @@ export default function TodoReduce(state = todoList, action) {
         todoArr: state.todoArr.filter((e, i) => i !== action.payload),
       };
 
-      case UPDATE_TASK:
-        return{
-          ...state, todoArr: state.todoArr.map(    
-            (task, index) => index === action.index ? {...task, name : action.newTask}: task) 
-        }
+    case UPDATE_TASK:
+      const { payload } = action;
+      console.log("payload Edit:", action);
+      return {
+        ...state,
+        todoArr: state.todoArr.map((task, index) =>
+          index === payload.id ? { ...task, name: payload.text } : task
+        )
+      };
+
     default:
       return state;
   }

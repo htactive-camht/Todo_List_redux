@@ -25,11 +25,12 @@ export const deleteTask = (id) => {
 }
  
  export const updateTask = (id, text) => {
+     console.log("action Log:", text);
     return ({
         type: UPDATE_TASK,
         payload: {
-            id,
-            text
+            id:id,
+            text:text
         }
     })
 
