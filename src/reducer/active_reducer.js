@@ -35,7 +35,7 @@ export default function TodoReduce(state = todoList, action) {
 
     case UPDATE_TASK:
       const { payload } = action;
-      console.log("payload Edit:", action);
+      console.log("payload Edit:", payload.text);
       return {
         ...state,
         todoArr: state.todoArr.map((task, index) =>

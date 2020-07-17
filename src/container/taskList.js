@@ -20,6 +20,7 @@ class TaskList extends Component {
     this.state = {
       NewTodo: this.props.todo.name,
       edit: false,
+      cloneValue:''
     };
   }
 
@@ -55,13 +56,19 @@ class TaskList extends Component {
     }));
   };
 
-  updateTodoList = (index) => {
-    const { dispatch } = this.props;
-    dispatch(updateTask(index, this.state.NewTodo));
+  // updateTodoList = (index) => {
+  //   const { dispatch } = this.props;
+  //   dispatch(updateTask(index, this.state.NewTodo));
+    // this.setState((state) => ({
+    //   edit: !state.edit,
+    // }));
+  // };
+
+  closeCheck = () => {
     this.setState((state) => ({
       edit: !state.edit,
     }));
-  };
+  }
 
   createTaskList() {
     const { editId } = this.state;
@@ -105,7 +112,7 @@ class TaskList extends Component {
               <div key={index} id="divTodo" className="divTodo">
                 <div className="divTodoHeader">
                   <Input type="checkbox"></Input>
-                  <Button onClick={() => this.updateTodoList(index)}>
+                  <Button  onClick = { () => this.closeCheck()} >
                     <CheckOutlined />
                   </Button>
                   <Button onClick={() => this.deleteTaskByID(index)}>
@@ -124,6 +131,7 @@ class TaskList extends Component {
                         className="text-area"
                         onChange={(event) =>
                           dispatch(updateTask(index, event.target.value))
+                          // this.setState({NewTodo: event.target.value})
                         }
                         value={eachTask.name}
                       ></TextArea>
