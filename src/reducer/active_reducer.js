@@ -12,7 +12,10 @@ const todoList = {
     { name: "Task 1",
     color: "blue",
     isUpdate: false
-   }],
+   },  { name: "Task 2",
+   color: "red",
+   isUpdate: false
+  }],
  
 };
 export default function TodoReduce(state = todoList, action) {

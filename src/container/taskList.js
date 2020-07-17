@@ -57,55 +57,154 @@ class TaskList extends Component {
   //  }));
   //  }
 
+  // createTaskList() {
+  //   let listItems = this.props.todo.map((eachTask, index) => {
+  //     const { editId } = this.state;
+  //     if (!this.state.edit) {
+  //       return (
+          // <div key={index} id="divTodo" className="divTodo">
+          //   <div className="divTodoHeader">
+          //     <Input type="checkbox"></Input>
+          //     <Button onClick={() => this.editUpdateTodoList(index)}>
+          //       {" "}
+          //       <EditOutlined />
+          //     </Button>
+          //     <Button onClick={() => this.deleteTaskByID(index)}>
+          //       <CloseOutlined />
+          //     </Button>
+          //   </div>
+          //   <div className="divTodoHeader">
+          //     <Row>
+          //       <Col span={24}>Date time: </Col>
+          //     </Row>
+          //   </div>
+          //   <div className="divTodoHeader">
+          //     <Row>
+          //       <Col span={24}>Content :{eachTask.name}</Col>
+          //     </Row>
+          //   </div>
+          // </div>
+  //       );
+  //     } else {
+  //       return (
+  //         <div id="todolist">
+  //           {this.props.todo.map((task, index) =>
+  //             editId === index ? (
+  //               <div key={index} className="divTodo">
+  //                 <div className="divTodoHeader">
+  //                   <Input type="checkbox"></Input>
+  //                   <Button>
+  //                     <CheckOutlined />
+  //                   </Button>
+  //                   <Button onClick={() => this.deleteTaskByID(index)}>
+  //                     <CloseOutlined />
+  //                   </Button>
+  //                 </div>
+  //                 <div className="divTodoHeader">
+  //                   <Row>
+  //                     <Col span={24}>Date time: </Col>
+  //                   </Row>
+  //                 </div>
+                  // <div className="divTodoHeader">
+                  //   <Row>
+                  //     <Col span={24}>
+                  //       <TextArea
+                  //         className="text-area"
+                  //         onChange={(event) =>
+                  //           this.setState({ text: event.target.value })
+                  //         }
+                  //         placeholder={eachTask.name}
+                  //         value={this.state.name}
+                  //       ></TextArea>
+                  //     </Col>
+                  //   </Row>
+                  // </div>
+  //               </div>
+  //             ) : (
+  //               <div key={index} className="divTodo">
+  //                 <div className="divTodoHeader">
+  //                   <Input type="checkbox"></Input>
+  //                   <Button onClick={() => this.editUpdateTodoList(index)}>
+  //                     {" "}
+  //                     <EditOutlined />
+  //                   </Button>
+  //                   <Button onClick={() => this.deleteTaskByID(index)}>
+  //                     <CloseOutlined />
+  //                   </Button>
+  //                 </div>
+  //                 <div className="divTodoHeader">
+  //                   <Row>
+  //                     <Col span={24}>Date time: </Col>
+  //                   </Row>
+  //                 </div>
+  //                 <div className="divTodoHeader">
+  //                   <Row>
+  //                     <Col span={24}>Content :{eachTask.name}</Col>
+  //                   </Row>
+  //                 </div>
+  //               </div>
+  //             )
+  //           )}
+  //         </div>
+  //       );
+  //     }
+  //   });
+  //   return listItems;
+  // }
+
   createTaskList() {
-    let listItems = this.props.todo.map((eachTask, index) => {
-      const { editId } = this.state;
-      if (!this.state.edit) {
+    const {editId} = this.state
+    if (!this.state.edit) {
+
+    return (
+        <div id='todolist'>
+            {this.props.todo.map((eachTask, index) => (
+                 <div key={index} id="divTodo" className="divTodo">
+                 <div className="divTodoHeader">
+                   <Input type="checkbox"></Input>
+                   <Button onClick={() => this.editUpdateTodoList(index)}>
+                     {" "}
+                     <EditOutlined />
+                   </Button>
+                   <Button onClick={() => this.deleteTaskByID(index)}>
+                     <CloseOutlined />
+                   </Button>
+                 </div>
+                 <div className="divTodoHeader">
+                   <Row>
+                     <Col span={24}>Date time: </Col>
+                   </Row>
+                 </div>
+                 <div className="divTodoHeader">
+                   <Row>
+                     <Col span={24}>Content :{eachTask.name}</Col>
+                   </Row>
+                 </div>
+               </div>
+            ))}
+        </div>
+    )
+    } else {
         return (
-          <div key={index} id="divTodo" className="divTodo">
-            <div className="divTodoHeader">
-              <Input type="checkbox"></Input>
-              <Button onClick={() => this.editUpdateTodoList(index)}>
-                {" "}
-                <EditOutlined />
-              </Button>
-              <Button onClick={() => this.deleteTaskByID(index)}>
-                <CloseOutlined />
-              </Button>
-            </div>
-            <div className="divTodoHeader">
-              <Row>
-                <Col span={24}>Date time: </Col>
-              </Row>
-            </div>
-            <div className="divTodoHeader">
-              <Row>
-                <Col span={24}>Content :{eachTask.name}</Col>
-              </Row>
-            </div>
-          </div>
-        );
-      } else {
-        return (
-          <div id="todolist">
-            {this.props.todo.map((task, index) =>
-              editId === index ? (
-                <div key={index} className="divTodo">
-                  <div className="divTodoHeader">
-                    <Input type="checkbox"></Input>
-                    <Button>
-                      <CheckOutlined />
-                    </Button>
-                    <Button onClick={() => this.deleteTaskByID(index)}>
-                      <CloseOutlined />
-                    </Button>
-                  </div>
-                  <div className="divTodoHeader">
-                    <Row>
-                      <Col span={24}>Date time: </Col>
-                    </Row>
-                  </div>
-                  <div className="divTodoHeader">
+            <div id='todolist'>
+                {this.props.todo.map((eachTask,index) => (
+                    ( editId === index) ? <div key={index} id="divTodo" className="divTodo">
+                    <div className="divTodoHeader">
+                      <Input type="checkbox"></Input>
+                      <Button onClick={() => this.editUpdateTodoList(index)}>
+                        {" "}
+                        <CheckOutlined />
+                      </Button>
+                      <Button onClick={() => this.deleteTaskByID(index)}>
+                        <CloseOutlined />
+                      </Button>
+                    </div>
+                    <div className="divTodoHeader">
+                      <Row>
+                        <Col span={24}>Date time: </Col>
+                      </Row>
+                    </div>
+                    <div className="divTodoHeader">
                     <Row>
                       <Col span={24}>
                         <TextArea
@@ -119,38 +218,34 @@ class TaskList extends Component {
                       </Col>
                     </Row>
                   </div>
-                </div>
-              ) : (
-                <div key={index} className="divTodo">
-                  <div className="divTodoHeader">
-                    <Input type="checkbox"></Input>
-                    <Button onClick={() => this.editUpdateTodoList(index)}>
-                      {" "}
-                      <EditOutlined />
-                    </Button>
-                    <Button onClick={() => this.deleteTaskByID(index)}>
-                      <CloseOutlined />
-                    </Button>
+                  </div> : 
+                    <div key={index} id="divTodo" className="divTodo">
+                    <div className="divTodoHeader">
+                      <Input type="checkbox"></Input>
+                      <Button onClick={() => this.editUpdateTodoList(index)}>
+                        {" "}
+                        <EditOutlined />
+                      </Button>
+                      <Button onClick={() => this.deleteTaskByID(index)}>
+                        <CloseOutlined />
+                      </Button>
+                    </div>
+                    <div className="divTodoHeader">
+                      <Row>
+                        <Col span={24}>Date time: </Col>
+                      </Row>
+                    </div>
+                    <div className="divTodoHeader">
+                      <Row>
+                        <Col span={24}>Content :{eachTask.name}</Col>
+                      </Row>
+                    </div>
                   </div>
-                  <div className="divTodoHeader">
-                    <Row>
-                      <Col span={24}>Date time: </Col>
-                    </Row>
-                  </div>
-                  <div className="divTodoHeader">
-                    <Row>
-                      <Col span={24}>Content :{eachTask.name}</Col>
-                    </Row>
-                  </div>
-                </div>
-              )
-            )}
-          </div>
-        );
-      }
-    });
-    return listItems;
-  }
+                ))} 
+            </div> 
+        )
+    }
+}
 
   render() {
     return (
