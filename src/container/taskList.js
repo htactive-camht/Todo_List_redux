@@ -16,6 +16,7 @@ import { EditOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 class TaskList extends Component {
   constructor(props) {
+    
     super(props);
     this.state = {
       NewTodo: this.props.todo.name,
@@ -25,6 +26,9 @@ class TaskList extends Component {
   }
 
   EnterInput = (e) => {
+    const d = new Date();
+    const n = d.toISOString();
+    // Created: {moment(new Date(props.createdAt)).format("YYYY-MM-DD hh:mm:ss")
     const { dispatch } = this.props;
     if (e.key === "Enter") {
       console.log("Event:", e.value);
@@ -32,6 +36,7 @@ class TaskList extends Component {
         addTaskList({
           name: this.state.NewTodo,
           color: this.getRandomColor(),
+          date: n,
           isUpdate: false,
         })
       );
@@ -80,12 +85,12 @@ class TaskList extends Component {
           {this.props.todo.map((eachTask, index) => (
             <div key={index} id="divTodo" className="divTodo">
               <div className="divTodoHeader">
-                <Input type="checkbox"></Input>
-                <Button onClick={() => this.editUpdateTodoList(index)}>
+                  <input type ="checkbox" className ="input-checkbox"></input>
+                <Button className='btnIcon' onClick={() => this.editUpdateTodoList(index)} >
                   {" "}
                   <EditOutlined />
                 </Button>
-                <Button onClick={() => this.deleteTaskByID(index)}>
+                <Button  className='btnIcon'  onClick={() => this.deleteTaskByID(index)}>
                   <CloseOutlined />
                 </Button>
               </div>
@@ -111,11 +116,11 @@ class TaskList extends Component {
             editId === index ? (
               <div key={index} id="divTodo" className="divTodo">
                 <div className="divTodoHeader">
-                  <Input type="checkbox"></Input>
-                  <Button  onClick = { () => this.closeCheck()} >
+                  <input type="checkbox" className ="input-checkbox"></input>
+                  <Button  className='btnIcon' onClick = { () => this.closeCheck()} >
                     <CheckOutlined />
                   </Button>
-                  <Button onClick={() => this.deleteTaskByID(index)}>
+                  <Button className='btnIcon' onClick={() => this.deleteTaskByID(index)}>
                     <CloseOutlined />
                   </Button>
                 </div>
@@ -142,11 +147,11 @@ class TaskList extends Component {
             ) : (
               <div key={index} id="divTodo" className="divTodo">
                 <div className="divTodoHeader">
-                  <Input type="checkbox"></Input>
-                  <Button onClick={() => this.editUpdateTodoList(index)}>
+                <input type="checkbox" className ="input-checkbox"></input>
+                  <Button className='btnIcon' onClick={() => this.editUpdateTodoList(index)}>
                     <EditOutlined />
                   </Button>
-                  <Button onClick={() => this.deleteTaskByID(index)}>
+                  <Button className='btnIcon' onClick={() => this.deleteTaskByID(index)}>
                     <CloseOutlined />
                   </Button>
                 </div>
@@ -175,14 +180,10 @@ class TaskList extends Component {
           <Input
             name="NewTodo"
             onKeyDown={(e) => this.EnterInput(e)}
+            placeholder ="Enter new task if you want to add"
             onChange={(e) => this.setState({ NewTodo: e.target.value })}
             type="text"
           ></Input>
-        </div>
-        <div className="ant-radio-group">
-          <label>All |</label>
-          <label>Incomple |</label>
-          <label>Completed</label>
         </div>
         <p>{this.createTaskList()}</p>
       </div>

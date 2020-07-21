@@ -12,5 +12,17 @@
   background-color: blueviolet;
 }
 
+.container-menu{
+  float: left;
+  width: 20%;
+  height: auto;
+}
+
+.container-task{
+    float: left;
+    width: 80%;
+    height: auto;
+}
+
 
 
