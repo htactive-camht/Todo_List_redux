@@ -128,3 +128,15 @@
   margin-right: 14px;
   width: 54px;
 }
+.container-tabs{
+  font-size: 14px;
+ margin-top: 10px;
+  font-weight: 400;
+  color: rgb(151, 151, 151);
+  line-height: inherit;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  padding: 0px 15px;
+  /* margin-left: 100px; */
+  border-width: 1px;
+}

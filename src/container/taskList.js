@@ -8,6 +8,7 @@ import {
   updateTask,
 } from "../actions/index";
 import "./tasklist.css";
+import Demo from './tabs';
 import { Row, Col, Input, Button } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { EditOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
@@ -185,6 +186,7 @@ class TaskList extends Component {
             type="text"
           ></Input>
         </div>
+        <Demo/>
         <p>{this.createTaskList()}</p>
       </div>
     );
