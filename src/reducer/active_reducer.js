@@ -3,6 +3,7 @@ import {
   ADD_TASK,
   DELETE_TASK,
   UPDATE_TASK,
+  CHECK_TASK,
 } from "../actions/actionType";
 // import store from '../app/store'
 // import ListTodo from './list_todo';
@@ -11,8 +12,20 @@ const d = new Date();
 const n = d.toISOString();
 const todoList = {
   todoArr: [
-    { name: "Task 1", date: n, color: "blue", isUpdate: false },
-    { name: "Task 2", date: n, color: "red", isUpdate: false },
+    {
+      name: "Task 1",
+      date: n,
+      color: "blue",
+      isUpdate: false,
+      completed: false,
+    },
+    {
+      name: "Task 2",
+      date: n,
+      color: "red",
+      isUpdate: false,
+      completed: false,
+    },
   ],
 };
 export default function TodoReduce(state = todoList, action) {
@@ -42,7 +55,15 @@ export default function TodoReduce(state = todoList, action) {
         ...state,
         todoArr: state.todoArr.map((task, index) =>
           index === payload.id ? { ...task, name: payload.text } : task
-        )
+        ),
+      };
+
+    case CHECK_TASK:
+      return {
+        ...state,
+        todoArr: state.todoArr.map((task, index) =>
+          index === payload.id ? { ...task, completed: !task.completed } : task
+        ),
       };
 
     default:

@@ -1,7 +1,6 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Tabs } from 'antd';
-
+import React from "react";
+import "antd/dist/antd.css";
+import { Tabs } from "antd";
 const { TabPane } = Tabs;
 
 function callback(key) {

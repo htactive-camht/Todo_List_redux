@@ -6,9 +6,10 @@ import {
   addTaskList,
   deleteTask,
   updateTask,
+  checkTask,
 } from "../actions/index";
 import "./tasklist.css";
-import Demo from './tabs';
+import Demo from "./tabs";
 import { Row, Col, Input, Button } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { EditOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
@@ -16,15 +17,11 @@ import { EditOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
 // import UPDATE_TASK from "../reducer/active_reducer";
 
 class TaskList extends Component {
-  constructor(props) {
-    
-    super(props);
-    this.state = {
-      NewTodo: this.props.todo.name,
-      edit: false,
-      cloneValue:''
-    };
-  }
+  state = {
+    NewTodo: "",
+    edit: false,
+    cloneValue: "",
+  };
 
   EnterInput = (e) => {
     const d = new Date();
@@ -32,17 +29,25 @@ class TaskList extends Component {
     // Created: {moment(new Date(props.createdAt)).format("YYYY-MM-DD hh:mm:ss")
     const { dispatch } = this.props;
     if (e.key === "Enter") {
-      console.log("Event:", e.value);
-      dispatch(
-        addTaskList({
-          name: this.state.NewTodo,
-          color: this.getRandomColor(),
-          date: n,
-          isUpdate: false,
-        })
-      );
+      // check without the NewTodo faile
+      if (this.state.NewTodo.trim() === "" || this.state.NewTodo.length > 66) {
+        alert("Please enter your new task or over max lenght character");
+        this.setState({ NewTodo: "" });
+      } else {
+        console.log("Event:", e.value);
+        dispatch(
+          addTaskList({
+            //  Delete space character
+            name: this.state.NewTodo.split(" ").join(""),
+            color: this.getRandomColor(),
+            date: n,
+            isUpdate: false,
+            completed: false,
+          })
+        );
+        this.setState({ NewTodo: "" });
+      }
     }
-    this.setState({ NewTodo: "" });
   };
 
   getRandomColor() {
@@ -62,47 +67,62 @@ class TaskList extends Component {
     }));
   };
 
+  checkTaskByID = () => {
+    const { dispatch } = this.props;
+    this.setState((state) => ({
+      completed: !state.completed,
+    }));
+  };
+
   // updateTodoList = (index) => {
   //   const { dispatch } = this.props;
   //   dispatch(updateTask(index, this.state.NewTodo));
-    // this.setState((state) => ({
-    //   edit: !state.edit,
-    // }));
+  // this.setState((state) => ({
+  //   edit: !state.edit,
+  // }));
   // };
+
+  
 
   closeCheck = () => {
     this.setState((state) => ({
       edit: !state.edit,
     }));
-  }
+  };
 
   createTaskList() {
     const { editId } = this.state;
     const { dispatch } = this.props;
-    console.log(this.props.todo, 'this.props.todo');
+    console.log(this.props.todo, "this.props.todo");
+    console.log('check tick', this.state.completed);
     if (!this.state.edit) {
       return (
         <div id="todolist">
           {this.props.todo.map((eachTask, index) => (
             <div key={index} id="divTodo" className="divTodo">
               <div className="divTodoHeader">
-                  <input type ="checkbox" className ="input-checkbox"></input>
-                <Button className='btnIcon' onClick={() => this.editUpdateTodoList(index)} >
+                <input type="checkbox" className="input-checkbox" onClick = {() => this.checkTaskByID()}></input>
+                <Button
+                  className="btnIcon"
+                  onClick={() => this.editUpdateTodoList(index)}
+                >
                   {" "}
                   <EditOutlined />
                 </Button>
-                <Button  className='btnIcon'  onClick={() => this.deleteTaskByID(index)}>
+                <Button
+                  className="btnIcon"
+                  onClick={() => this.deleteTaskByID(index)}
+                >
                   <CloseOutlined />
                 </Button>
               </div>
               <div className="divTodoHeader">
                 <Row>
-          <Col span={24}>Date time: {eachTask.date}</Col>
+                  <Col span={24}>Date time: {eachTask.date}</Col>
                 </Row>
               </div>
               <div className="divTodoHeader">
                 <Row>
-                  
                   <Col span={24}>Content :{eachTask.name}</Col>
                 </Row>
               </div>
@@ -117,11 +137,14 @@ class TaskList extends Component {
             editId === index ? (
               <div key={index} id="divTodo" className="divTodo">
                 <div className="divTodoHeader">
-                  <input type="checkbox" className ="input-checkbox"></input>
-                  <Button  className='btnIcon' onClick = { () => this.closeCheck()} >
+                  <input type="checkbox" className="input-checkbox"></input>
+                  <Button className="btnIcon" onClick={() => this.closeCheck()}>
                     <CheckOutlined />
                   </Button>
-                  <Button className='btnIcon' onClick={() => this.deleteTaskByID(index)}>
+                  <Button
+                    className="btnIcon"
+                    onClick={() => this.deleteTaskByID(index)}
+                  >
                     <CloseOutlined />
                   </Button>
                 </div>
@@ -135,8 +158,9 @@ class TaskList extends Component {
                     <Col span={24}>
                       <TextArea
                         className="text-area"
-                        onChange={(event) =>
-                          dispatch(updateTask(index, event.target.value))
+                        onChange={
+                          (event) =>
+                            dispatch(updateTask(index, event.target.value))
                           // this.setState({NewTodo: event.target.value})
                         }
                         value={eachTask.name}
@@ -148,11 +172,17 @@ class TaskList extends Component {
             ) : (
               <div key={index} id="divTodo" className="divTodo">
                 <div className="divTodoHeader">
-                <input type="checkbox" className ="input-checkbox"></input>
-                  <Button className='btnIcon' onClick={() => this.editUpdateTodoList(index)}>
+                  <input type="checkbox" className="input-checkbox"></input>
+                  <Button
+                    className="btnIcon"
+                    onClick={() => this.editUpdateTodoList(index)}
+                  >
                     <EditOutlined />
                   </Button>
-                  <Button className='btnIcon' onClick={() => this.deleteTaskByID(index)}>
+                  <Button
+                    className="btnIcon"
+                    onClick={() => this.deleteTaskByID(index)}
+                  >
                     <CloseOutlined />
                   </Button>
                 </div>
@@ -181,12 +211,13 @@ class TaskList extends Component {
           <Input
             name="NewTodo"
             onKeyDown={(e) => this.EnterInput(e)}
-            placeholder ="Enter new task if you want to add"
+            placeholder="Enter new task if you want to add"
             onChange={(e) => this.setState({ NewTodo: e.target.value })}
+            value={this.state.NewTodo}
             type="text"
           ></Input>
         </div>
-        <Demo/>
+        <Demo />
         <p>{this.createTaskList()}</p>
       </div>
     );
