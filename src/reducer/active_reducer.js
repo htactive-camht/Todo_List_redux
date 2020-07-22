@@ -12,20 +12,7 @@ const d = new Date();
 const n = d.toISOString();
 const todoList = {
   todoArr: [
-    {
-      name: "Task 1",
-      date: n,
-      color: "blue",
-      isUpdate: false,
-      completed: false,
-    },
-    {
-      name: "Task 2",
-      date: n,
-      color: "red",
-      isUpdate: false,
-      completed: false,
-    },
+    
   ],
 };
 export default function TodoReduce(state = todoList, action) {
@@ -45,7 +32,7 @@ export default function TodoReduce(state = todoList, action) {
       console.log(" delete", action.payload);
       return {
         ...state,
-        todoArr: state.todoArr.filter((e, i) => i !== action.payload),
+        todoArr: state.todoArr.filter((e, i) => e.id !== action.payload),
       };
 
     case UPDATE_TASK:
@@ -54,15 +41,16 @@ export default function TodoReduce(state = todoList, action) {
       return {
         ...state,
         todoArr: state.todoArr.map((task, index) =>
-          index === payload.id ? { ...task, name: payload.text } : task
+        task.id === payload.id ? { ...task, name: payload.text } : task
         ),
       };
 
-    case CHECK_TASK:
+      case CHECK_TASK:
+        
       return {
         ...state,
         todoArr: state.todoArr.map((task, index) =>
-          index === payload.id ? { ...task, completed: !task.completed } : task
+        task.id === action.payload.id ?{ ...task, completed: !task.completed } : task
         ),
       };
 

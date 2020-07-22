@@ -9,14 +9,17 @@ import {createStore} from 'redux';
 
 
 
-const stores = createStore(allReducers)
+const stores = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
-  <React.StrictMode>
+ 
     <Provider store ={stores}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  
   document.getElementById('root')
 );
 

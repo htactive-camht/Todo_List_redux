@@ -9,7 +9,7 @@ export const selectTaskList = (task) => {
 }
 
 export const addTaskList = (task) => {
-    console.log("đã vào action", task);
+    
     return {
         type: ADD_TASK,
         payload: task
@@ -17,22 +17,25 @@ export const addTaskList = (task) => {
 }
 
 export const deleteTask = (id) => {
-      console.log('deleteTask íd',id);
+     
     return {
         type: DELETE_TASK,
         payload: id
     }
 }
  
-export const checkTask = (id) => {
-    console.log('check Task',id);
-  return {
-      type: CHECK_TASK,
-      payload: id
-  }
-}
+// export const checkTask = (id ) => {
+//     console.log('check Task',id);
+//     return ({
+//         type: UPDATE_TASK,
+//         payload: {
+//             id:id,
+//         }
+//     })
+// }
+
  export const updateTask = (id, text) => {
-     console.log("action Log:", text);
+     
     return ({
         type: UPDATE_TASK,
         payload: {
@@ -40,5 +43,16 @@ export const checkTask = (id) => {
             text:text
         }
     })
+
+}
+export const checkTask = (id, ischeck) => {
+    
+   return ({
+       type: CHECK_TASK,
+       payload: {
+           id,
+           ischeck
+       }
+   })
 
 }
