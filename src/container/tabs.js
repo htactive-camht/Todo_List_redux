@@ -16,7 +16,6 @@ class Demo extends Component {
         return (
           <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="All" key="1">
-          
           </TabPane>
           <TabPane tab="Incompleted" key="2">
           

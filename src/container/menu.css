@@ -1,0 +1,13 @@
+.ant-menu-vertical .ant-menu-item, .ant-menu-vertical-left .ant-menu-item, .ant-menu-vertical-right .ant-menu-item, .ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-submenu-title, .ant-menu-vertical-left .ant-menu-submenu-title, .ant-menu-vertical-right .ant-menu-submenu-title, .ant-menu-inline .ant-menu-submenu-title {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    padding: 0 16px;
+    overflow: hidden;
+    line-height: 40px;
+    text-overflow: ellipsis;
+}
+
+.menu-submenu > .ant-menu-submenu-title, .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+    height: 56px;
+    line-height: 40px;
+}

@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import {
-  selectTaskList,
   addTaskList,
   deleteTask,
   updateTask,
@@ -12,13 +10,8 @@ import "./tasklist.css";
 import { Row, Col, Input, Button } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { EditOutlined, CloseOutlined, CheckOutlined } from "@ant-design/icons";
-import { Tabs } from "antd";
-import { v1 as uuid } from 'uuid';
-const { TabPane } = Tabs;
+import { v1 as uuid } from "uuid";
 
-function callback(key) {
-  console.log(key);
-}
 // import TodoReduce from "../reducer/active_reducer";
 // import UPDATE_TASK from "../reducer/active_reducer";
 
@@ -28,40 +21,37 @@ class TaskList extends Component {
     edit: false,
     cloneValue: "",
     completed: false,
-    todoList: []
+    todoList: [],
   };
 
-componentWillReceiveProps (nextProps) {
-  return this.setState({ todoList: nextProps.todo});
-      
+  componentWillReceiveProps(nextProps) {
+    return this.setState({ todoList: nextProps.todo });
   }
-  
 
-  EnterInput = (e) => {
+  EnterInput = (value) => {
+    console.log("enter", value);
     const d = new Date();
     const n = d.toISOString();
     // Created: {moment(new Date(props.createdAt)).format("YYYY-MM-DD hh:mm:ss")
     const { dispatch } = this.props;
-    if (e.key === "Enter") {
-      // check without the NewTodo faile
-      if (this.state.NewTodo.trim() === "" || this.state.NewTodo.length > 66) {
-        alert("Please enter your new task or over max lenght character");
-        this.setState({ NewTodo: "" });
-      } else {
-        console.log("Event:", e.value);
-        dispatch(
-          addTaskList({
-            //  Delete space character
-            id: uuid(),
-            name: this.state.NewTodo.split(" ").join(""),
-            color: this.getRandomColor(),
-            date: n,
-            isUpdate: false,
-            completed: false,
-          })
-        );
-        this.setState({ NewTodo: "" });
-      }
+    // check without the NewTodo faile
+    if (this.state.NewTodo.trim() === "" || this.state.NewTodo.length > 66) {
+      alert("Please enter your new task or over max lenght character");
+      this.setState({ NewTodo: "" });
+    } else {
+      console.log("Event:", value);
+      dispatch(
+        addTaskList({
+          //  Delete space character
+          id: uuid(),
+          name: this.state.NewTodo.split(" ").join(""),
+          color: this.getRandomColor(),
+          date: n,
+          isUpdate: false,
+          completed: false,
+        })
+      );
+      this.setState({ NewTodo: "" });
     }
   };
 
@@ -83,25 +73,34 @@ componentWillReceiveProps (nextProps) {
   };
 
   checkTaskByID = (id, check) => {
-    
     const { dispatch } = this.props;
-    
+
     dispatch(checkTask(id, check));
   };
 
   handleAll = (id) => {
-    this.setState({ todoList: this.props.todo});
+    this.setState({ todoList: this.props.todo });
   };
 
-   handleInCompleted = () => {
-     console.log("Incompleted", this.props.todo.filter(item => item.completed === false));
-    return this.setState({ todoList: this.props.todo.filter(item => item.completed === false)});
-   }
+  handleInCompleted = () => {
+    console.log(
+      "Incompleted",
+      this.props.todo.filter((item) => item.completed === false)
+    );
+    return this.setState({
+      todoList: this.props.todo.filter((item) => item.completed === false),
+    });
+  };
 
-   handleCompleted = () => {
-    console.log("completed", this.props.todo.filter(item => item.completed !== false));
-   return this.setState({ todoList: this.props.todo.filter(item => item.completed !== false)});
-  }
+  handleCompleted = () => {
+    console.log(
+      "completed",
+      this.props.todo.filter((item) => item.completed !== false)
+    );
+    return this.setState({
+      todoList: this.props.todo.filter((item) => item.completed !== false),
+    });
+  };
 
   closeCheck = () => {
     this.setState((state) => ({
@@ -112,7 +111,7 @@ componentWillReceiveProps (nextProps) {
   createTaskList() {
     const { editId } = this.state;
     const { dispatch } = this.props;
-    
+
     if (!this.state.edit) {
       return (
         <div id="todolist">
@@ -122,8 +121,11 @@ componentWillReceiveProps (nextProps) {
                 <input
                   type="checkbox"
                   className="input-checkbox"
-                  onClick={() => this.checkTaskByID(eachTask.id, !eachTask.completed)}
+                  onClick={() =>
+                    this.checkTaskByID(eachTask.id, !eachTask.completed)
+                  }
                   checked={eachTask.completed}
+                  onChange={() => {}}
                 ></input>
                 <Button
                   className="btnIcon"
@@ -163,8 +165,11 @@ componentWillReceiveProps (nextProps) {
                   <input
                     type="checkbox"
                     className="input-checkbox"
-                    onClick={() => this.checkTaskByID(eachTask.id, !eachTask.completed)}
+                    onClick={() =>
+                      this.checkTaskByID(eachTask.id, !eachTask.completed)
+                    }
                     checked={eachTask.completed}
+                    onChange={()=>{}}
                   ></input>
                   <Button className="btnIcon" onClick={() => this.closeCheck()}>
                     <CheckOutlined />
@@ -188,7 +193,9 @@ componentWillReceiveProps (nextProps) {
                         className="text-area"
                         onChange={
                           (event) =>
-                            dispatch(updateTask(eachTask.id, event.target.value))
+                            dispatch(
+                              updateTask(eachTask.id, event.target.value)
+                            )
                           // this.setState({NewTodo: event.target.value})
                         }
                         value={eachTask.name}
@@ -203,8 +210,11 @@ componentWillReceiveProps (nextProps) {
                   <input
                     type="checkbox"
                     className="input-checkbox"
-                    onClick={() => this.checkTaskByID(eachTask.id, !eachTask.completed)}
+                    onClick={() =>
+                      this.checkTaskByID(eachTask.id, !eachTask.completed)
+                    }
                     checked={eachTask.completed}
+                    onChange={()=>{}}
                   ></input>
                   <Button
                     className="btnIcon"
@@ -243,14 +253,14 @@ componentWillReceiveProps (nextProps) {
         <div className="input-add">
           <Input
             name="NewTodo"
-            onKeyDown={(e) => this.EnterInput(e)}
+            onPressEnter={(e) => this.EnterInput(e.target.value)}
             placeholder="Enter new task if you want to add"
             onChange={(e) => this.setState({ NewTodo: e.target.value })}
             value={this.state.NewTodo}
             type="text"
           ></Input>
         </div>
-        
+
         <div className="menu">
           <button onClick={() => this.handleAll()}>All</button>
           <button onClick={() => this.handleInCompleted()}>Incomplete</button>
@@ -264,7 +274,7 @@ componentWillReceiveProps (nextProps) {
 
 const mapStateToProps = (state) => {
   // mapStateToProps là hàm có sẳn không được tự tạo
-  
+
   return {
     taskList: state.listTask,
     todo: state.todo.todoArr,
